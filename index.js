@@ -70,7 +70,7 @@ class EDDevice extends EventEmitter {
         const prom = new Promise((resolve, reject) => {
             promiseResolve = resolve;
             promiseReject = reject;
-            console.log("TX => "+command)
+            //console.log("TX => "+command)
             this.socket.write(Buffer.from(command+'\r'));
             if(noResponse) {
                 resolve();
@@ -91,7 +91,7 @@ class EDDevice extends EventEmitter {
             const response = this._queue.slice(0,nextChunk);
             this._queue = this._queue.slice(nextChunk+1);
             nextChunk = this._queue.indexOf('\r');
-            console.log("RX <= " + response)
+            //console.log("RX <= " + response)
             this.emit('response', response);
             const promRes = this._promiseResolutionQueue.shift();
             promRes.promiseResolve(response);
